@@ -1,0 +1,96 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <style>
+      footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background-color: #333;
+        color:#fff;
+      }
+      .page-holder {
+        min-height: 100vh;
+      }
+
+      .bg-cover {
+        background-size: cover !important;
+      }
+
+    </style>
+  </head>
+  <div style="background: url(https://images.pexels.com/photos/92331/pexels-photo-92331.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)" class="page-holder bg-cover">
+  <div class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+
+      <a class="navbar-brand" href="{% url 'learning_logs:index' %}">
+        Learning Log
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarCollapse" aria-controls="navbarCollapse"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'learning_logs:topics' %}">
+              Topics
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <span class="navbar-text">Hello, {{ user.username }}.</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </nav>
+
+    <main role="main" class="container">
+      <div class="pb-2 mb-2 border-bottom">
+        {% block page_header %}{% endblock page_header %}
+      </div>
+      <div>
+        {% block content %}
+        {% endblock %}
+      </div>
+    </main>
+    </div>
+
+    <footer class="text-center text-white mt-auto"
+            style="background-color: #f1f1f1;">
+
+      <!-- Copyright -->
+      <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-dark" href="https://romangala.com/">RomanGala.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </body>
+</html>

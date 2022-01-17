@@ -1,0 +1,27 @@
+{%  extends 'learning_logs/base.html' %}
+
+{% block title %} topics {% endblock %}
+
+{% block page_header %}
+  <h1>Topics
+  <a class="btn btn-light float-right"
+    href="{% url 'learning_logs:new_topic' %}">
+    &roplus; Add new topic
+  </a></h1>
+{% endblock %}
+
+{% block content %}
+  <ul>
+    {% for topic in topics %}
+      <li><h4><a href="{{ topic.id }}" class="text-secondary"><b>{{ topic }}</b></a>
+        <a class="btn btn-light btn-sm float-right"
+           href="{% url 'learning_logs:delete_topic' topic.id %}">
+          &rotimes; delete topic
+        </a></h4></li>
+      <hr>
+    {% empty %}
+      <h3>No topics have been added yet.</h3>
+    {%  endfor %}
+  </ul>
+
+{% endblock %}
